@@ -1,78 +1,41 @@
-# Traffic Sign Prediction & Recognition 🚦
+# 🌿 Branch: PyTorch Convolutional Neural Network (CNN) & HOG-CNN Hybrid
 
-A comprehensive Machine Learning and Deep Learning system for classifying traffic signs using the **German Traffic Sign Recognition Benchmark (GTSRB)** dataset (43 classes). Includes baseline models, feature extraction (HOG), ensemble architectures, deep learning models, and an interactive Flask web application.
+[![Branch](https://img.shields.io/badge/Git%20Branch-technique%2Fcnn--pytorch-blue.svg)](https://github.com/nirranjan121/Traffic_Sign_Prediction/tree/technique/cnn-pytorch)
+[![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red.svg)](https://pytorch.org/)
 
----
-
-## 🌟 Key Features
-
-- **Multi-Model Machine Learning Experiments**:
-  - **Logistic Regression**: Baseline classification and weather data augmentation evaluation.
-  - **Support Vector Machine (SVM)**: Feature classification using Histogram of Oriented Gradients (HOG).
-  - **k-Nearest Neighbors (k-NN)** & **Random Forest**: Supervised learning performance benchmarks.
-  - **Stacking Ensemble**: Meta-classification combining Logistic Regression, Random Forest, and k-NN.
-  - **PyTorch CNN & HOG-CNN Hybrid**: Deep learning architecture combining convolutional feature maps with classical HOG feature vectors.
-- **Interactive Flask Web Application**: Simple, modern web interface to upload traffic sign images and view real-time class predictions.
+This branch implements **PyTorch Deep Learning models**, featuring a multi-layer Convolutional Neural Network (CNN) and a **Hybrid HOG-CNN Fusion Network** for 43-class traffic sign classification.
 
 ---
 
-## 🌿 Repository Branch Structure
+## 🔬 Architecture Overview
 
-This repository is organized into distinct feature branches representing different model techniques:
+### 1. PyTorch Baseline CNN (`Conv2d` + `MaxPool2d` + `ReLU`)
+- **Conv Layer 1**: `3 -> 32` channels, kernel $3 \times 3$, padding 1 + MaxPool $2 \times 2$.
+- **Conv Layer 2**: `32 -> 64` channels, kernel $3 \times 3$, padding 1 + MaxPool $2 \times 2$.
+- **Dense Layers**: Linear classifier mapping flattened CNN spatial features to 43 output classes.
 
-| Branch Name | Technique / Focus | Key Components |
-| :--- | :--- | :--- |
-| `main` | **Full Project Baseline & Web Application** | Clean baseline notebook, Flask app (`app.py`), model training & inference engine |
-| `technique/logistic-regression` | **Logistic Regression & Weather Augmentations** | Weather effect functions (fog, rain, contrast) + linear classification |
-| `technique/svm-hog` | **SVM with HOG Feature Extraction** | Histogram of Oriented Gradients descriptor + Support Vector Machine |
-| `technique/knn-rf` | **k-NN & Random Forest Models** | Parameter comparison and decision tree ensemble classification |
-| `technique/stacking-ensemble` | **Stacking Meta-Classifier** | Stacking classifier integrating LR, Random Forest, and k-NN base estimators |
-| `technique/cnn-pytorch` | **PyTorch Deep Learning & HOG-CNN** | Multi-layer PyTorch CNN and hybrid CNN + HOG feature fusion pipeline |
+### 2. HOG-CNN Feature Fusion Network (`CNN_HOG_Model`)
+- Extracts spatial deep learning features via CNN channels.
+- Computes classical Histogram of Oriented Gradients (HOG) descriptor vector on the grayscale image input.
+- **Fusion Layer**: Concatenates `[CNN_spatial_features, HOG_vector]` before dense classification layers (`Linear(cnn_dim + hog_dim, 256) -> Linear(256, 43)`).
 
 ---
 
-## 🚀 Quick Start
+## 📁 Key Branch Files
 
-### 1. Installation
-Clone the repository and install the dependencies:
+- **`cnn_pytorch_experiment.ipynb`**: Experiment notebook demonstrating custom `PyTorch Dataset`, `DataLoader`, GPU/CPU device assignment, loss computation (`CrossEntropyLoss`), Adam optimizer, and training loop.
+
+---
+
+## 🏃 Running This Branch
 
 ```bash
-git clone https://github.com/nirranjan121/Traffic_Sign_Prediction.git
-cd Traffic_Sign_Prediction
+# 1. Switch to this branch
+git checkout technique/cnn-pytorch
+
+# 2. Install dependencies (including torch, torchvision)
 pip install -r requirements.txt
+
+# 3. Launch experiment notebook
+jupyter notebook cnn_pytorch_experiment.ipynb
 ```
-
-### 2. Dataset Preparation
-Download the **GTSRB (German Traffic Sign Recognition Benchmark)** dataset and extract it into a `GTSRB/` directory at the project root:
-
-```text
-Traffic_Sign_Prediction/
-├── GTSRB/
-│   ├── Train/
-│   │   ├── 0/
-│   │   ├── 1/
-│   │   └── ... (0 to 42)
-│   ├── Test/
-│   └── Train.csv
-```
-
-### 3. Run Web Application
-Train the model (optional if pre-trained joblib model exists) and launch the Flask server:
-
-```bash
-python train_model.py
-python app.py
-```
-Open your browser at `http://127.0.0.1:5000/`.
-
----
-
-## 📊 Dataset Overview
-
-- **Classes**: 43 distinct traffic sign categories (Speed limits, Yield, Stop, Warnings, Mandatory directions, etc.).
-- **Total Images**: Over 50,000 images in varying lighting, scale, and environmental conditions.
-
----
-
-## 📜 License
-Distributed under the MIT License.
