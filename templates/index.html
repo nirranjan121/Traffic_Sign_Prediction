@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Sign Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Traffic Sign Prediction</h1>
+        <p style="color: var(--text-secondary);">Upload a traffic sign image to identify its class using machine learning.</p>
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="file-drop-zone">
+                <input type="file" name="file" accept="image/*" required>
+            </div>
+            <input type="submit" value="Analyze Traffic Sign">
+        </form>
+    </div>
+</body>
+</html>

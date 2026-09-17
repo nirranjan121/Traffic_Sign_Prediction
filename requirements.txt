@@ -1,0 +1,14 @@
+# Flask and Web Server
+Flask
+gunicorn
+werkzeug
+
+# Machine Learning and Data
+scikit-learn
+numpy
+opencv-python-headless
+joblib
+
+# Plotting (for training script)
+matplotlib
+seaborn
